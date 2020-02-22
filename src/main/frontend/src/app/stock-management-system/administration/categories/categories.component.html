@@ -1,0 +1,86 @@
+<div class="jumbotron"
+     style="background-color: transparent; padding-bottom: 0px !important; margin-bottom: 0px !important;">
+  <div class="row">
+    <div class="row">
+      <div id="main-container-categories" class="col-sm-12">
+        <div class="col-sm-12">
+          <div class="col-sm-12" style="padding-bottom: 50px">
+            <!-------------------- Add categories form -------------------->
+            <form>
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <b [hidden]="!createMode">Add category</b>
+                  <b [hidden]="createMode">Edit category</b>
+                </div>
+                <div class="panel-body">
+                  <div class="col-sm-12">
+                    <table class="table panel-table">
+                      <tr>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Category:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="category.name" name="category"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%"></td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%"></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="form-group ">
+                    <div class="col-sm-12" [hidden]="!createMode">
+                      <button (click)="add(category)" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-floppy-o" style="padding-right: 8px"></i><b>Add</b>
+                      </button>
+                    </div>
+                    <div class="col-sm-12" [hidden]="createMode">
+                      <button (click)="edit(category)" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-pencil-square-o" style="padding-right: 8px"></i><b>Edit</b>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-------------------- Date table -------------------->
+            <table class="table table-striped" #mf="mfDataTable" [mfData]="categories" [mfRowsOnPage]="rowsOnPage"
+                   [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+              <tr>
+                <th width="75px">
+                  Actions
+                </th>
+                <th>
+                  <mfDefaultSorter by="name">Category name</mfDefaultSorter>
+                </th>
+              </tr>
+              </thead>
+              <tbody style="background-color: white">
+              <tr *ngFor="let category of mf.data">
+                <td>
+                  <i style="padding-right: 15px" class="fa fa-pencil-square-o" aria-hidden="true"
+                     (click)="selectCategory(category)"></i>
+                  <i class="fa fa-trash" aria-hidden="true" (click)="delete(category)"></i>
+                </td>
+                <td>{{category.name}}</td>
+              </tr>
+              </tbody>
+              <tfoot style="background: white; padding-bottom: 0; padding-top: 0; text-align: center">
+              <tr>
+                <td colspan="2">
+                  <mfBootstrapPaginator [rowsOnPageSet]="rowsOnPage"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

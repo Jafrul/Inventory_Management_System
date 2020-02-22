@@ -1,0 +1,140 @@
+<div class="jumbotron"
+     style="background-color: transparent; padding-bottom: 0px !important; margin-bottom: 0px !important;">
+  <div class="row">
+    <div class="row">
+      <div id="main-container-team" class="col-sm-12">
+        <div class="col-sm-12">
+          <div class="col-sm-12" style="padding-bottom: 50px">
+            <!-------------------- Add admin form -------------------->
+            <form>
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <b [hidden]="!createMode">Add user</b>
+                  <b [hidden]="createMode">Edit user</b>
+                </div>
+                <div class="panel-body">
+                  <div class="col-sm-12">
+                    <table class="table panel-table">
+                      <tr>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>First Name:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Last Name:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>Phone number:</b></h5>
+                          </div>
+                          <div>
+                            <input type="text" class="form-control" [(ngModel)]="user.phoneNumber" name="phoneNumber"
+                                   required="required">
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>email:</b></h5>
+                          </div>
+                          <div>
+                            <input type="email" class="form-control" [(ngModel)]="user.email" name="email"
+                                   required="required">
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="border-top: none; width: 30%">
+                          <div>
+                            <h5><b>User type:</b></h5>
+                          </div>
+                          <div>
+                            <select [(ngModel)]="user.type" name="userTypes"
+                                    style="width: 100%; height: 35px"
+                                    required="required">
+                              <option *ngFor="let userType of userTypes">{{userType}}</option>
+                            </select>
+                          </div>
+                        </td>
+                        <td style="width: 5%; border-top: none"></td>
+                        <td style="width: 30%; border-top: none"></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="form-group ">
+                    <div class="col-sm-12" [hidden]="!createMode">
+                      <button (click)="add()" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-floppy-o" style="padding-right: 8px"></i><b>Add</b>
+                      </button>
+                    </div>
+                    <div class="col-sm-12" [hidden]="createMode">
+                      <button (click)="edit()" class="btn btn-success update-job pull-right col-sm-1"><i
+                        class="fa fa-pencil-square-o" style="padding-right: 8px"></i><b>Edit</b>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <!-------------------- Date table -------------------->
+            <table class="table table-striped" #mf="mfDataTable" [mfData]="users" [mfRowsOnPage]="rowsOnPage"
+                   [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+              <thead>
+              <tr>
+                <th width="75px">
+                  Actions
+                </th>
+                <th>
+                  <mfDefaultSorter by="firstName">User name</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="phoneNumber">Phone number</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="email">email</mfDefaultSorter>
+                </th>
+                <th>
+                  <mfDefaultSorter by="type">User type</mfDefaultSorter>
+                </th>
+              </tr>
+              </thead>
+              <tbody style="background-color: white">
+              <tr *ngFor="let user of mf.data">
+                <td>
+                  <i style="padding-right: 15px" class="fa fa-pencil-square-o" aria-hidden="true"
+                     (click)="selectUser(user)"></i>
+                  <i class="fa fa-trash" aria-hidden="true" (click)="delete(user)"></i>
+                </td>
+                <td>{{user.firstName}} {{user.lastName}}</td>
+                <td>{{user.phoneNumber}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.type}}</td>
+              </tr>
+              </tbody>
+              <tfoot style="background: white; padding-bottom: 0; padding-top: 0; text-align: center">
+              <tr>
+                <td colspan="5">
+                  <mfBootstrapPaginator [rowsOnPageSet]="rowsOnPage"></mfBootstrapPaginator>
+                </td>
+              </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
